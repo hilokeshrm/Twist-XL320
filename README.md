@@ -162,4 +162,37 @@ Command:
 
 ---
 
-*Ready for your feedback!* Let me know if there’s anything you’d like to adjust or expand, and I’ll update the masterplan accordingly.
+## 11. Project Structure
+```
+twist-pi/
+├── README.md
+├── requirements.txt
+├── setup.py                  # optional, if you package it
+│
+├── config/
+│   └── settings.py           # Wi-Fi, WebSocket port, calibration constants
+│
+├── twist_pi/
+│   ├── __init__.py
+│   │
+│   ├── main.py               # entry point: launches asyncio event loop
+│   │
+│   ├── servo_controller.py   # async interface for XL320 servos
+│   ├── battery_monitor.py    # async ADC reads → battery percentage
+│   ├── ws_server.py          # WebSocket server: handles telemetry & commands
+│   │
+│   ├── telemetry.py          # data classes & JSON schema enforcement
+│   ├── commands.py           # data classes for command parsing/validation
+│   │
+│   └── utils/
+│       ├── logger.py         # structured logging setup
+│       ├── helpers.py        # shared utility functions (e.g., retries)
+│       └── exceptions.py     # custom exception types
+│
+└── tests/
+    ├── test_servo_controller.py
+    ├── test_battery_monitor.py
+    ├── test_ws_server.py
+    └── test_telemetry_command_models.py
+
+```
